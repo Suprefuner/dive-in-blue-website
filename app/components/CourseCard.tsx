@@ -1,3 +1,5 @@
+"use client"
+
 import { FC } from "react"
 import { RiArrowRightLine } from "react-icons/ri"
 import { motion, useAnimate } from "framer-motion"

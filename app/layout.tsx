@@ -1,7 +1,9 @@
+// "use client"
+
 import "./globals.css"
 import { Poppins } from "next/font/google"
 import { Navbar, Footer } from "./components"
-import { motion } from "framer-motion"
+// import { motion } from "framer-motion"
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -17,12 +19,13 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const MotionNavbar = motion(Navbar)
+  // const MotionNavbar = motion(Navbar)
 
   return (
     <html lang="en">
       <body className={poppins.className}>
-        <MotionNavbar
+        <Navbar />
+        {/* <MotionNavbar
           initial={{ y: "-100%" }}
           animate={{ y: 0 }}
           transition={{
@@ -31,7 +34,7 @@ export default function RootLayout({
             type: "tween",
             ease: "easeOut",
           }}
-        />
+        /> */}
         {children}
         <Footer />
       </body>
