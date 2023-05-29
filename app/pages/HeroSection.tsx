@@ -1,15 +1,8 @@
 "use client"
 
-import Image from "next/image"
-import { useEffect, useRef } from "react"
+import { useEffect } from "react"
 import { motion } from "framer-motion"
-import {
-  Video,
-  OpeningAnimate,
-  Container,
-  GooeyButton,
-  AboutSectionTopWave,
-} from "../components"
+import { Video, OpeningAnimate, Container, GooeyButton } from "../components"
 
 const containerVariant = {
   show: {
@@ -33,8 +26,6 @@ const childVariant = {
 }
 
 const HeroSection = () => {
-  const videoRef = useRef<HTMLVideoElement>(null)
-
   useEffect(() => {
     document.documentElement.style.overflow = "hidden"
   }, [])
