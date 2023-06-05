@@ -1,0 +1,148 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  USER
+  COACH
+  ADMIN
+}
+
+model User {
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  name           String
+  email          String?   @unique
+  emailVerified  DateTime?
+  image          String?
+  hashedPassword String?
+  role           Role      @default(USER)
+  numOfDive      Int?
+  level          String?
+  certificate    String?
+  bio            String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  accounts              Account[]
+  FavoriteList          FavoriteList[]
+  Cart                  Cart[]
+  Order                 Order[]
+  // ==========================================================
+  asStudentCourseIds    String[]       @db.ObjectId
+  asStudentCourses      Course[]       @relation(fields: [asStudentCourseIds], references: [id])
+  asInstructorCourseIds String[]       @db.ObjectId
+  asInstructorCourses   Course[]       @relation("instructor", fields: [asInstructorCourseIds], references: [id])
+  // ==========================================================
+}
+
+// FOR SOCIAL LOGIN
+model Account {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String  @db.ObjectId
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.String
+  access_token      String? @db.String
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.String
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Course {
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  name              String
+  totalNumOfStudent Int      @default(4)
+  available         Int      @default(4)
+  isFull            Boolean  @default(false)
+  startDate         DateTime
+  endDate           DateTime
+  price             Int
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  // ========================================================
+  studentIds        String[] @db.ObjectId
+  students          User[]   @relation(fields: [studentIds], references: [id])
+  instructorIds     String[] @db.ObjectId
+  instructors       User[]   @relation("instructor", fields: [instructorIds], references: [id])
+}
+
+enum GENDER {
+  MEN
+  WOMEN
+}
+
+model Product {
+  id             String        @id @default(auto()) @map("_id") @db.ObjectId
+  name           String
+  description    String?
+  gender         GENDER
+  category       String
+  images         Image[]
+  size           String[]
+  color          String
+  stock          Int           @default(0)
+  price          Int
+  previousPrice  Int?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  // ========================================================
+  Cart           Cart?         @relation(fields: [cartId], references: [id])
+  cartId         String?       @db.ObjectId
+  FavoriteList   FavoriteList? @relation(fields: [favoriteListId], references: [id])
+  favoriteListId String?       @db.ObjectId
+}
+
+type Image {
+  mobile  ImageObject?
+  desktop ImageObject
+}
+
+type ImageObject {
+  url      String
+  publicId String
+}
+
+model FavoriteList {
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  products Product[]
+  // ========================================================
+  userId   String    @db.ObjectId
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Cart {
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  products Product[]
+  quantity Int       @default(0)
+  price    Float     @default(0)
+  orders   Order[]
+  // ========================================================
+  userId   String    @db.ObjectId
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Order {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  quantity  Int
+  price     Float
+  createdAt DateTime @default(now())
+  // ========================================================
+  userId    String   @db.ObjectId
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cartId    String   @db.ObjectId
+  cart      Cart     @relation(fields: [cartId], references: [id], onDelete: Cascade)
+}

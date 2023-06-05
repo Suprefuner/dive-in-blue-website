@@ -6,13 +6,21 @@ import { TextBGColorChangeAnimation } from "../components"
 
 const CourseSection = () => {
   return (
-    <section className="h-screen relative bg-trinary/10">
-      <div className="absolute left-1/2 top-[200px] -translate-x-1/2">
-        <TextBGColorChangeAnimation className="text-8xl">
+    <section className="min-h-screen relative grid bg-white">
+      <div className="py-[8rem] self-center">
+        <TextBGColorChangeAnimation className="text-4xl text-center lg:text-7xl">
           Explore with us
         </TextBGColorChangeAnimation>
       </div>
-      <div className="grid grid-cols-4 content-end h-full">
+      <div
+        className="
+          h-full 
+          grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4
+          md:[&>*:nth-child(odd)]:border-r
+          lg:[&>*:not(:last-child)]:border-r
+          border-b border-black
+          "
+      >
         {courseList.map((course, i) => (
           <CourseCard key={i} heading={course.title} content={course.content} />
         ))}

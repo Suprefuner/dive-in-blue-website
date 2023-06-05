@@ -18,8 +18,8 @@ const OpeningAnimate = () => {
       <motion.div
         animate={{ y: "-50vh" }}
         transition={{
-          delay: 3,
-          duration: 3,
+          delay: 3.5,
+          duration: 2,
           type: "tween",
           ease: CUBIC_BEZIER,
         }}
@@ -43,8 +43,8 @@ const OpeningAnimate = () => {
       <motion.div
         animate={{ y: "50vh" }}
         transition={{
-          delay: 3,
-          duration: 3,
+          delay: 3.5,
+          duration: 2,
           type: "tween",
           ease: CUBIC_BEZIER,
         }}

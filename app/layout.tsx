@@ -1,9 +1,7 @@
-// "use client"
-
 import "./globals.css"
 import { Poppins } from "next/font/google"
-import { Navbar, Footer } from "./components"
-// import { motion } from "framer-motion"
+import { Navbar, Footer, GooeyFilter } from "./components"
+import AuthContext from "@/context/AuthContext"
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -19,24 +17,16 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  // const MotionNavbar = motion(Navbar)
-
   return (
     <html lang="en">
       <body className={poppins.className}>
-        <Navbar />
-        {/* <MotionNavbar
-          initial={{ y: "-100%" }}
-          animate={{ y: 0 }}
-          transition={{
-            delay: 6.5,
-            duration: 0.5,
-            type: "tween",
-            ease: "easeOut",
-          }}
-        /> */}
-        {children}
-        <Footer />
+        <AuthContext>
+          <Navbar />
+          {children}
+          <Footer />
+          {/* @ts-ignore */}
+          <GooeyFilter />
+        </AuthContext>
       </body>
     </html>
   )

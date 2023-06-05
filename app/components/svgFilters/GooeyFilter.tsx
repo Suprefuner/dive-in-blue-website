@@ -1,4 +1,4 @@
-const GooeyFilter = () => {
+const GooeyFilter = async () => {
   return (
     <svg className="hidden">
       <defs>
@@ -7,7 +7,8 @@ const GooeyFilter = () => {
           <feColorMatrix
             in="blur"
             type="matrix"
-            values={"1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -8"}
+            // values={"1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -8"}
+            values={"1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -8"}
             result="goo"
           />
           <feComposite in="SourceGraphic" in2="goo" operator="atop" />

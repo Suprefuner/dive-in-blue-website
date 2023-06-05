@@ -11,7 +11,7 @@ const Video: FC<VideoProps> = ({ source }) => {
       muted
       loop
       preload="auto"
-      className="absolute inset-0 -z-10 w-full h-full object-cover"
+      className="absolute inset-0 -z-20 w-full h-full object-cover"
     >
       <source src={source} type="video/mp4" />
       Your browser does not support the video tag.

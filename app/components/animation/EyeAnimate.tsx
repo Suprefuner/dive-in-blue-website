@@ -46,7 +46,6 @@ const EyeAnimate = () => {
 
   const onFrame = () => {
     if (!ref.current || !mouse) return
-    // FIXME
     // @ts-ignore
     let point = mouse.matrixTransform(ref.current.getScreenCTM().inverse())
     leftEye?.rotateTo({ x: point?.x, y: point?.y })
@@ -84,15 +83,15 @@ const EyeAnimate = () => {
 
   return (
     <div>
-      <svg ref={ref} width="150px" height="150px" viewBox="0 0 1000 1000">
+      <svg ref={ref} width="75px" height="75px" viewBox="0 0 1000 1000">
         <g id="left-eye">
           <circle
             id="eye"
             cx="250"
             cy="500"
-            r="250"
+            r="230"
             stroke="#000000"
-            strokeWidth="2"
+            strokeWidth="40"
             fill="#fff"
           />
           <circle id="pupil" cx="125" cy="500" r="125" fill="#000" />
@@ -102,9 +101,9 @@ const EyeAnimate = () => {
             id="eye"
             cx="750"
             cy="500"
-            r="250"
+            r="230"
             stroke="#000000"
-            strokeWidth="2"
+            strokeWidth="40"
             fill="#fff"
           />
           <circle id="pupil" cx="625" cy="500" r="125" fill="#000" />

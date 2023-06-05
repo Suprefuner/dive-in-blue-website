@@ -37,7 +37,7 @@ const CourseCard: FC<CourseCardProps> = ({ heading, content }) => {
   return (
     <motion.div
       ref={scope}
-      className=" bg-white cursor-pointer relative overflow-hidden border-r border-t border-b border-black"
+      className=" bg-white cursor-pointer relative overflow-hidden border-t border-black"
       onMouseOver={handleMouseOver}
       onMouseLeave={handleMouseLeave}
     >

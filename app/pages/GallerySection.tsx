@@ -9,9 +9,10 @@ import {
 } from "react"
 import { motion, useScroll, useSpring, useTransform } from "framer-motion"
 import ResizeObserver from "resize-observer-polyfill"
-import { TextBGColorChangeAnimation, Container } from "../components"
+import { TextBGColorChangeAnimation } from "../components"
 import { galleryPhotos } from "@/utils/constants"
 import Image from "next/image"
+import DecorCircle from "../components/DecorCircle"
 
 const GallerySection = () => {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -36,6 +37,7 @@ const GallerySection = () => {
   const handleResize = useCallback((entries: ResizeObserverEntry[]) => {
     for (let entry of entries) {
       setViewportWidth(entry.contentRect.width)
+      setMargin((window.innerWidth - 1160) / 2)
     }
   }, [])
 
@@ -48,10 +50,6 @@ const GallerySection = () => {
     return () => resizeObserver.disconnect()
   }, [handleResize])
 
-  useEffect(() => {
-    console.log(scrollRange)
-  }, [scrollRange])
-
   const { scrollYProgress } = useScroll({
     target: ghostRef,
   })
@@ -59,7 +57,12 @@ const GallerySection = () => {
   const transform = useTransform(
     scrollYProgress,
     [0, 1],
-    [0, -scrollRange! + viewportWidth - margin! * 2]
+    [
+      margin < 0 ? -margin : 0,
+      margin < 0
+        ? -scrollRange! + viewportWidth - margin!
+        : -scrollRange! + viewportWidth - margin! * 2,
+    ]
   )
 
   const spring = useSpring(transform, {
@@ -69,20 +72,29 @@ const GallerySection = () => {
   })
 
   return (
-    <section ref={containerRef}>
+    <section ref={containerRef} className="relative bg-white">
       <div className="sticky top-0 left-0 right-0">
         <div className="flex flex-col items-start justify-center h-screen overflow-x-hidden">
+          {/* 
+          =========================================
+          HEADING
+          =========================================
+          */}
           <div
             ref={wrapperRef}
-            className="mb-[100px]"
-            style={{
-              marginLeft: margin,
-            }}
+            className="mb-[100px] mx-auto md:mx-0"
+            style={margin >= 0 ? { marginLeft: margin } : undefined}
           >
-            <TextBGColorChangeAnimation className="text-7xl">
+            <TextBGColorChangeAnimation className="text-4xl text-center lg:text-7xl pl-8 lg:pl-0">
               This would be you
             </TextBGColorChangeAnimation>
           </div>
+
+          {/* 
+          =========================================
+          PHOTOS
+          =========================================
+          */}
           <motion.div
             style={{
               x: spring,
@@ -92,15 +104,16 @@ const GallerySection = () => {
             className="flex items-center gap-5"
           >
             {galleryPhotos.map((photo, i) => (
-              <Image
-                key={i}
-                src={photo}
-                alt="picture of underwater"
-                priority={true}
-                width={450}
-                height={200}
-                className="w-full h-full object-cover aspect-video"
-              />
+              <div key={i} className="w-[450px] overflow-hidden">
+                <Image
+                  src={photo}
+                  alt="picture of underwater"
+                  priority={true}
+                  width={450}
+                  height={200}
+                  className="object-cover aspect-video hover:scale-110 transition duration-300 cursor-pointer"
+                />
+              </div>
             ))}
           </motion.div>
         </div>

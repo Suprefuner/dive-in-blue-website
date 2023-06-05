@@ -1,9 +1,4 @@
-export const navLinks = [
-  "about us",
-  "diving courses",
-  "pro-level courses",
-  "our shop",
-]
+export const navLinks = ["about us", "diving courses", "contact"]
 
 export const briefList = [
   "Full PADI 5 Star CDC Rating Multi-Award Winning Dive Center",

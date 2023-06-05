@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 html {
-  /* firefox */
+  /* firefox hide scroll-bar*/
   scrollbar-width: none;
 }
 
 ::-webkit-scrollbar {
-  /* chrome */
+  /* chrome hide scroll-bar */
   display: none;
 }

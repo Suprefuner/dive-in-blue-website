@@ -24,7 +24,7 @@ const TextBGColorChangeAnimation: FC<TextBGColorChangeAnimationProps> = ({
           transition: "all 2s ease-in-out",
         }}
         className={`
-          text-transparent text-5xl font-semibold 
+          text-transparent text-3xl md:text-5xl font-semibold 
           bg-clip-text bg-text-effect-gradient 
           bg-2x bg-[100%] ${className}`}
       >
