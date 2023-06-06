@@ -1,6 +1,5 @@
 import Image from "next/image"
 import Container from "./Container"
-import DecorCircle from "./DecorCircle"
 import {
   AiFillInstagram,
   AiOutlineTwitter,
@@ -15,7 +14,7 @@ const icons = [
 
 const Footer = () => {
   return (
-    <footer className="bg-primary text-white pt-[70px] lg:pt-[110px] pb-[15px] relative overflow-hidden">
+    <footer className="bg-primary text-white pt-[70px] lg:pt-[110px] pb-[15px] relative ">
       <Container className="px-8">
         <div className="lg:flex items-start justify-between border-b border-white pb-10 mx-5 lg:mx-0">
           <div className="w-max mx-auto lg:mx-0">
@@ -49,9 +48,6 @@ const Footer = () => {
           <span>Design and build by Joe Chan</span>
         </div>
       </Container>
-      <div className="absolute right-[12rem] z-50 -top-[8rem] rotate-90">
-        <DecorCircle size="20rem" />
-      </div>
     </footer>
   )
 }

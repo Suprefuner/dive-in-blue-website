@@ -1,12 +1,15 @@
 "use client"
 // FIXME STUDY why i have to use client on this section? just becoz i import container
 
-import { useState, useRef, useEffect, useCallback, useMemo } from "react"
-import Image from "next/image"
+import { useState, useRef, useEffect, useMemo } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Container } from "../components"
+import clsx from "clsx"
+
+import { Container } from "@/app/components"
 import { aboutSectionParagraph } from "@/utils/constants"
-import DecorCircle from "../components/DecorCircle"
+import DecorCircle from "../../../components/DecorCircle"
+import { slideIn } from "../../../animation/motion"
+import WaveEdge from "@/app/components/WaveEdge"
 
 const AboutSection = () => {
   const leftRef = useRef<HTMLDivElement>(null)
@@ -28,6 +31,8 @@ const AboutSection = () => {
         let index: number = 0
 
         if (window.innerWidth > 1024) {
+          // WHEN LEFT'S BOTTOM IS GREATER THAN THE RIGHT'S TOP
+          // === WHEN LEFT IS ENTER TO RIGHT'S HEIGHT AREA
           for (let paragraph of pRefs) {
             if (
               // @ts-ignore
@@ -39,6 +44,8 @@ const AboutSection = () => {
             }
           }
         } else {
+          // WHEN LEFT'S BOTTOM IS LESS THAN THE RIGHT'S TOP
+          // === WHEN LEFT IS PASS TO LAST RIGHT'S
           for (let paragraph of pRefs) {
             if (
               // @ts-ignore
@@ -48,9 +55,7 @@ const AboutSection = () => {
             ) {
               index = pRefs.indexOf(paragraph)
               break
-            } else {
-              continue
-            }
+            } else continue
           }
         }
 
@@ -69,30 +74,19 @@ const AboutSection = () => {
   return (
     <section className="lg:h-auto relative bg-white mt-[100vh]">
       <motion.div
-        initial={{ y: "100%" }}
-        animate={{ y: 0 }}
-        transition={{
-          delay: 2,
-          type: "tween",
-          duration: 0.5,
-        }}
+        variants={slideIn({ direction: "up", delay: 2, duration: 0.5 })}
+        initial="hide"
+        animate="show"
         className="absolute left-0 right-0 -top-[100px]
         w-screen h-[100px] flex items-end"
       >
-        <Image
-          src="/bottom_wave.svg"
-          alt="wave"
-          width={1500}
-          height={200}
-          className="w-screen"
-        />
+        <WaveEdge src="/bottom_wave.svg" />
       </motion.div>
       <Container className="lg:flex pt-[50px] md:pt-[100px] lg:py-[150px]">
         <div
           className="
-          h-screen pb-[150px] lg:pb-0 lg:h-screen w-full lg:w-2/5
-          text-center
-        "
+          w-full lg:w-2/5 h-screen lg:h-screen
+          pb-[150px] lg:pb-0 text-center"
         >
           <AnimatePresence>
             <div
@@ -112,12 +106,7 @@ const AboutSection = () => {
                     className="inline-block ml-5"
                   >
                     <span className="block">offer</span>
-                    <span
-                      className="block 
-                      absolute left-1/2 lg:left-0 bottom-0 -translate-x-1/2 lg:translate-x-0
-                      translate-y-full 
-                    "
-                    >
+                    <span className="block absolute left-1/2 lg:left-0 bottom-0 -translate-x-1/2 lg:translate-x-0 translate-y-full">
                       are
                     </span>
                   </motion.span>
@@ -128,8 +117,7 @@ const AboutSection = () => {
         </div>
         <div
           className="
-          h-screen lg:w-3/5 px-10 
-          lg:py-7
+          h-screen lg:w-3/5 px-10 lg:py-7
           absolute lg:static pt-[250px] md:pt-[300px] top-0 
           flex flex-col justify-between
           "
@@ -138,9 +126,10 @@ const AboutSection = () => {
             <p
               ref={pRefs[i]}
               key={p}
-              className={`text-center lg:text-left text-4xl lg:text-5xl font-medium transition-all duration-500 ${
+              className={clsx(
+                `text-center lg:text-left text-4xl lg:text-5xl font-medium transition-all duration-500`,
                 currentParagraph === i ? "" : "blur-sm opacity-40"
-              }`}
+              )}
             >
               {p}
             </p>

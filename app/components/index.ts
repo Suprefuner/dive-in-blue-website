@@ -1,25 +1,23 @@
-import Navbar from "./Navbar"
+import Navbar from "./navbar/Navbar"
 import Footer from "./Footer"
 import Video from "./Video"
-import OpeningAnimate from "./animation/OpeningAnimate"
 import Container from "./Container"
 import GooeyButton from "./GooeyButton"
-import GooeyFilter from "./svgFilters/GooeyFilter"
 import TextBGColorChangeAnimation from "./animation/TextBGColorChangeAnimation"
 import EyeAnimate from "./animation/EyeAnimate"
-import CourseCard from "./CourseCard"
-import AboutSectionTopWave from "./waves/AboutSectionTopWave"
+import DecorCircle from "./DecorCircle"
+import SeaSnakeDecor from "./animation/SeaSnakeDecor"
+import GooeyFilter from "./svgFilters/GooeyFilter"
 
 export {
   Navbar,
   Footer,
   Container,
   Video,
-  OpeningAnimate,
-  GooeyButton,
   GooeyFilter,
+  GooeyButton,
   TextBGColorChangeAnimation,
   EyeAnimate,
-  CourseCard,
-  AboutSectionTopWave,
+  DecorCircle,
+  SeaSnakeDecor,
 }

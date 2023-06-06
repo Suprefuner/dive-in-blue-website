@@ -34,9 +34,42 @@ module.exports = {
             transform: "translateY(15%)",
           },
         },
+        "fish-move": {
+          "0%": {
+            transform: "translateY(var(--y)) translateX(100%)",
+          },
+          "100%": {
+            transform: "translateY(var(--y)) translateX(-133vw)",
+          },
+        },
+        "bubble-horizontal": {
+          "0%, 100%": {
+            transform: "translateX(-50px)",
+          },
+          "50%": {
+            transform: "translateX(var(--x))",
+          },
+        },
+        "bubble-vertical": {
+          "0%": {
+            transform: "translateY(0)",
+            opacity: 1,
+          },
+          "70%": {
+            opacity: 1,
+          },
+          "100%": {
+            transform: "translateY(var(--y))",
+            opacity: 0,
+          },
+        },
       },
       animation: {
         "pointing-down": "pointing-down 3s ease-in-out infinite",
+        "fish-move": "fish-move 8s ease-in-out",
+        "bubble-horizontal":
+          "bubble-horizontal calc(var(--time)*1s) ease-in-out 2",
+        "bubble-vertical": "bubble-vertical calc(var(--time)*1s) ease-in-out",
       },
     },
   },

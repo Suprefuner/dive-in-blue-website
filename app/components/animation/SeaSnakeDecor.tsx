@@ -1,5 +1,5 @@
 import Image from "next/image"
-import EyeAnimate from "./animation/EyeAnimate"
+import EyeAnimate from "./EyeAnimate"
 
 const SeaSnakeDecor = () => {
   return (
@@ -7,11 +7,19 @@ const SeaSnakeDecor = () => {
       <div className="absolute top-1 -left-3">
         <EyeAnimate />
       </div>
-      <div className="">
+      <div className="hidden md:block">
         <Image
           src="/sea_snake.svg"
           alt="illustration of sea snake"
           width={200}
+          height={150}
+        />
+      </div>
+      <div className="block md:hidden">
+        <Image
+          src="/sea_snake_mobile.svg"
+          alt="illustration of sea snake"
+          width={50}
           height={150}
         />
       </div>

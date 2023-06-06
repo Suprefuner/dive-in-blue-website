@@ -1,8 +1,8 @@
 "use client"
 
-import { CourseCard } from "../components"
+import CourseCard from "../CourseCard"
 import { courseList } from "@/utils/constants"
-import { TextBGColorChangeAnimation } from "../components"
+import { TextBGColorChangeAnimation } from "@/app/components"
 
 const CourseSection = () => {
   return (

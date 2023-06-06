@@ -2,6 +2,8 @@ import "./globals.css"
 import { Poppins } from "next/font/google"
 import { Navbar, Footer, GooeyFilter } from "./components"
 import AuthContext from "@/context/AuthContext"
+import AuthModal from "./components/modals/AuthModal"
+import GalleryModal from "./components/modals/GalleryModal"
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -22,6 +24,8 @@ export default function RootLayout({
       <body className={poppins.className}>
         <AuthContext>
           <Navbar />
+          <AuthModal />
+          <GalleryModal />
           {children}
           <Footer />
           {/* @ts-ignore */}

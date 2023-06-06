@@ -1,24 +1,17 @@
 "use client"
 
-import {
-  useState,
-  useRef,
-  useEffect,
-  useLayoutEffect,
-  useCallback,
-} from "react"
+import { useState, useRef, useLayoutEffect, useCallback } from "react"
 import { motion, useScroll, useSpring, useTransform } from "framer-motion"
 import ResizeObserver from "resize-observer-polyfill"
-import { TextBGColorChangeAnimation } from "../components"
-import { galleryPhotos } from "@/utils/constants"
-import Image from "next/image"
-import DecorCircle from "../components/DecorCircle"
+import { TextBGColorChangeAnimation } from "@/app/components"
+import Photos from "../Photos"
 
 const GallerySection = () => {
   const containerRef = useRef<HTMLDivElement>(null)
   const wrapperRef = useRef<HTMLDivElement>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
   const ghostRef = useRef<HTMLDivElement>(null)
+
   const [scrollRange, setScrollRange] = useState(0)
   const [margin, setMargin] = useState(0)
   const [viewportWidth, setViewportWidth] = useState(0)
@@ -96,33 +89,22 @@ const GallerySection = () => {
           =========================================
           */}
           <motion.div
+            ref={scrollRef}
             style={{
               x: spring,
               marginLeft: margin,
             }}
-            ref={scrollRef}
             className="flex items-center gap-5"
           >
-            {galleryPhotos.map((photo, i) => (
-              <div key={i} className="w-[450px] overflow-hidden">
-                <Image
-                  src={photo}
-                  alt="picture of underwater"
-                  priority={true}
-                  width={450}
-                  height={200}
-                  className="object-cover aspect-video hover:scale-110 transition duration-300 cursor-pointer"
-                />
-              </div>
-            ))}
+            <Photos />
           </motion.div>
         </div>
       </div>
-      {/* to create the scroll height for the horizontal scroll */}
+      {/* CREATE SCROLL HEIGHT FOR HORIZONTAL SCROLL */}
       <div
         ref={ghostRef}
         style={{ height: scrollRange }}
-        className="w-screen"
+        className="w-screen bg-red-500 relative -z-10"
       />
     </section>
   )

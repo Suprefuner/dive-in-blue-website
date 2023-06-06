@@ -50,10 +50,12 @@ const CourseCard: FC<CourseCardProps> = ({ heading, content }) => {
           {content}
         </p>
       </div>
-      <motion.div
-        className="overlay absolute inset-0 z-40 pointer-events-none
-      translate-x-[101%] bg-white mix-blend-difference"
-      />
+      {/* 
+      =========================================
+      BLACK OVERLAY
+      =========================================
+      */}
+      <motion.div className="overlay absolute inset-0 z-40 pointer-events-none translate-x-[101%] bg-white mix-blend-difference" />
     </motion.div>
   )
 }
