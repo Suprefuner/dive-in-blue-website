@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import useGeneral from "../store"
+import useGeneral from "./useGeneral"
 
 const useWindowWidth = () => {
   const setWindowWidth = useGeneral((store) => store.setWindowWidth)
@@ -14,6 +14,10 @@ const useWindowWidth = () => {
         setWindowWidth(window.innerWidth)
         requestId = null
       })
+    }
+
+    const handleSetInitialSize = () => {
+      setWindowWidth(window.innerWidth)
     }
 
     window.addEventListener("resize", handleResize)

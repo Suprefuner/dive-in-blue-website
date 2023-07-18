@@ -1,5 +1,6 @@
 "use client"
 
+import { useRouter } from "next/navigation"
 import { motion } from "framer-motion"
 import clsx from "clsx"
 
@@ -10,13 +11,14 @@ import NavLinks from "./NavLinks"
 import Logo from "../Logo"
 
 import { slideIn } from "../../animation/motion"
-import useGeneral from "../../store"
+import useGeneral from "../../hooks/useGeneral"
 import NavAuthMenu from "./NavAuthMenu"
 
 const HEIGHT = 80
 
 const Navbar = () => {
   const { setShowSidebar, navbarBgColor, windowWidth } = useGeneral()
+  const router = useRouter()
 
   const openSidebar = () => {
     document.documentElement.style.overflow = "hidden"
@@ -50,7 +52,9 @@ const Navbar = () => {
         >
           <HiMenu size={26} />
         </div>
-        <Logo width="150px" priority={true} />
+        <div className="cursor-pointer" onClick={() => router.push("/")}>
+          <Logo width="150px" priority={true} />
+        </div>
         <NavLinks height={HEIGHT} />
         <NavAuthMenu />
       </Container>

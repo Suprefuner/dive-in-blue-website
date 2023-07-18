@@ -5,8 +5,9 @@ import { motion } from "framer-motion"
 import { Video, Container, GooeyButton } from "@/app/components"
 import OpeningAnimate from "../animations/OpeningAnimate"
 import { staggerContainer } from "@/app/animation/motion"
-import useGeneral from "@/app/store"
+import useGeneral from "@/app/hooks/useGeneral"
 import ScrollDownIndicator from "../animations/ScrollDownIndicator"
+import useWindowWidth from "@/app/hooks/useWindowWidth"
 
 // FIXME WHY CAN'T USE slideIn function? no stagger effect
 const childVariant = {

@@ -45,15 +45,16 @@ export const slideIn = ({
 export const menuContainer = (windowWidth: number) => {
   return {
     hide: {
-      y: "70%",
+      y: "80%",
       clipPath:
+        // position the circle for better result
         windowWidth < 768
           ? "circle(10% at 81.5% 15px)"
-          : "circle(10% at 68% 15px)",
+          : "circle(10% at 63% 15px)",
       // clipPath: "circle(10% at 68% 15px)",
     },
     show: {
-      y: "120%",
+      y: "110%",
       clipPath: "circle(100%)",
       transition: {
         y: { ease: "easeInOut", duration: 0.5 },
@@ -61,11 +62,11 @@ export const menuContainer = (windowWidth: number) => {
       },
     },
     leave: {
-      y: "70%",
+      y: "80%",
       clipPath:
         windowWidth < 768
           ? "circle(10% at 81.5% 15px)"
-          : "circle(10% at 68% 15px)",
+          : "circle(10% at 63% 15px)",
       // clipPath: "circle(10% at 68% 15px)",
       transition: {
         clipPath: { duration: 0.3 },

@@ -5,6 +5,7 @@ import GoogleProvider from "next-auth/providers/google"
 import FacebookProvider from "next-auth/providers/facebook"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import prisma from "@/app/libs/prismadb"
+import { Role } from "@prisma/client"
 
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -47,12 +48,24 @@ export const authOptions: AuthOptions = {
         if (!isPasswordCorrect) {
           throw new Error("Invalid credentials")
         }
-
         return user
       },
     }),
   ],
   debug: process.env.NODE_ENV === "development",
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user)
+        // @ts-ignore
+        token.role = user.role
+
+      return token
+    },
+    async session({ session, token }) {
+      session.user.role = token.role as Role
+      return session
+    },
+  },
   session: {
     strategy: "jwt",
   },

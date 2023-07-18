@@ -1,5 +1,6 @@
 import Image from "next/image"
 import Container from "./Container"
+import WaveEdge from "./WaveEdge"
 import {
   AiFillInstagram,
   AiOutlineTwitter,
@@ -14,11 +15,17 @@ const icons = [
 
 const Footer = () => {
   return (
-    <footer className="bg-primary text-white pt-[70px] lg:pt-[110px] pb-[15px] relative ">
+    <footer className="bg-primary text-white pt-[70px] lg:pt-[30px] pb-[15px] relative z-20">
+      <div
+        className="absolute z-10 left-0 right-0 top-0 -translate-y-full
+      w-screen h-[100px] flex items-end"
+      >
+        <WaveEdge src="/footer-wave.svg" />
+      </div>
       <Container className="px-8">
         <div className="lg:flex items-start justify-between border-b border-white pb-10 mx-5 lg:mx-0">
           <div className="w-max mx-auto lg:mx-0">
-            <div className="brightness-100 invert w-[300px] lg:w-[200px] h-[100px] ">
+            <div className="brightness-100 invert w-[300px] lg:w-[200px] h-[100px] relative">
               <Image src="/dib_logo.svg" alt="logo" fill />
             </div>
             <ul className="flex items-center justify-center lg:justify-start gap-10 lg:gap-3 text-3xl mt-8 lg:mt-[60px] mb-[30px]">

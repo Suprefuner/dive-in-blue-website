@@ -2,6 +2,7 @@
 
 import { FC, useState, useEffect, useCallback } from "react"
 import clsx from "clsx"
+import { motion } from "framer-motion"
 import WaveEdge from "../WaveEdge"
 import { IoIosClose } from "react-icons/io"
 
@@ -9,7 +10,6 @@ interface ModalProps {
   type?: string
   isOpen: boolean
   onClose?: () => void
-  onSubmit?: () => void
   title?: string
   body: React.ReactNode
 }
@@ -18,7 +18,6 @@ const Modal: FC<ModalProps> = ({
   type = "modal",
   isOpen,
   onClose,
-  onSubmit,
   title,
   body,
 }) => {
@@ -28,24 +27,37 @@ const Modal: FC<ModalProps> = ({
     setShowModal(isOpen)
   }, [isOpen])
 
-  const handleClose = useCallback(() => {
-    // ALLOW THE FADE OUT ANIMATION FINISH
+  const handleClose = useCallback(
+    (e: React.MouseEvent<HTMLElement>) => {
+      // ALLOW THE FADE OUT ANIMATION FINISH
+      // @ts-ignore
+      const targetClassList = [...e.target.closest("div").classList]
+      if (
+        !targetClassList.includes("overlay") &&
+        !targetClassList.includes("btn-close")
+      )
+        return
 
-    setShowModal(false)
+      setShowModal(false)
 
-    if (onClose) {
-      setTimeout(() => {
-        onClose()
-      }, 500)
-    }
-  }, [onClose])
+      // delay for animation finish
+      if (onClose) {
+        setTimeout(() => {
+          onClose()
+        }, 500)
+      }
+    },
+    [onClose]
+  )
 
   if (!isOpen) return null
 
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       className={clsx(
-        `fixed inset-0 z-50 
+        `overlay fixed inset-0 z-50 
         flex justify-center items-center 
         transition duration-100`,
         showModal
@@ -69,7 +81,7 @@ const Modal: FC<ModalProps> = ({
         =======================================
         */}
         <div
-          className="absolute top-3 right-3 z-10 text-white cursor-pointer"
+          className="btn-close absolute top-3 right-3 z-10 text-white cursor-pointer"
           onClick={handleClose}
         >
           <IoIosClose size={40} />
@@ -104,7 +116,7 @@ const Modal: FC<ModalProps> = ({
           {body}
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }
 export default Modal

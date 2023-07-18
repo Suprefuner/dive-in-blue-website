@@ -2,6 +2,7 @@ import "./globals.css"
 import { Poppins } from "next/font/google"
 import { Navbar, Footer, GooeyFilter } from "./components"
 import AuthContext from "@/context/AuthContext"
+import ToastContext from "@/context/ToastContext"
 import AuthModal from "./components/modals/AuthModal"
 import GalleryModal from "./components/modals/GalleryModal"
 
@@ -23,6 +24,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={poppins.className}>
         <AuthContext>
+          <ToastContext />
           <Navbar />
           <AuthModal />
           <GalleryModal />

@@ -8,11 +8,15 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "primary-light": "#0BC8FF",
         primary: "#213757",
+        "primary-light": "#0BC8FF",
         secondary: "#FF6F61",
         "secondary-dark": "#EC5B4D",
         trinary: "#0BC8FF",
+        neutral: "#DADADA",
+        "neutral-dark-1": "#BABABA",
+        "neutral-dark-2": "#25313C",
+        "neutral-light-1": "#ECECEC",
       },
       backgroundSize: {
         "1/2": "50%",
@@ -24,6 +28,8 @@ module.exports = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         "text-effect-gradient":
           "radial-gradient(circle 200px, #000 25%, transparent 25%), linear-gradient(to right, #000 50%, #ccc 50%);",
+        "linear-gradient":
+          "linear-gradient(180deg, white 100px, rgb(11 200 255) 100px);",
       },
       keyframes: {
         "pointing-down": {

@@ -15,15 +15,14 @@ const Photos = () => {
       {galleryPhotos.map((photo, i) => (
         <div
           key={i}
-          className="w-[450px] overflow-hidden"
+          className="w-[450px] h-auto overflow-hidden"
           onClick={() => handleClick(photo)}
         >
           <Image
             src={photo}
             alt="picture of underwater"
-            priority={true}
             width={450}
-            height={200}
+            height={250}
             className="object-cover aspect-video hover:scale-110 transition duration-300 cursor-pointer"
           />
         </div>

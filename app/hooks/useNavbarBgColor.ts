@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import useGeneral from "../store"
+import useGeneral from "./useGeneral"
 
 const useNavbarBgColor = () => {
   const setNavbarBgColor = useGeneral((store) => store.setNavbarBgColor)

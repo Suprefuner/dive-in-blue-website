@@ -11,7 +11,7 @@ interface GeneralStore {
 const useGeneral = create<GeneralStore>((set) => ({
   navbarBgColor: "transparent",
   setNavbarBgColor: (color: string) => set({ navbarBgColor: color }),
-  windowWidth: window.innerWidth,
+  windowWidth: 0,
   setWindowWidth: (innerWidth) => set({ windowWidth: innerWidth }),
   showSidebar: false,
   setShowSidebar: (isShow) => set({ showSidebar: isShow }),

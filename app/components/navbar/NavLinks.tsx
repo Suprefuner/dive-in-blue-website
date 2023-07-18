@@ -1,10 +1,11 @@
+import Link from "next/link"
 import { motion } from "framer-motion"
 import clsx from "clsx"
 
 import { GrFormClose } from "react-icons/gr"
 import { staggerContainer } from "@/app/animation/motion"
 
-import useGeneral from "@/app/store"
+import useGeneral from "@/app/hooks/useGeneral"
 import { navLinks } from "@/utils/constants"
 
 const navLinkVar = {
@@ -62,8 +63,7 @@ const NavLinks: React.FC<NavLinksProps> = ({ height }) => {
           key={i}
           className="capitalize hover:text-secondary transition md:overflow-hidden"
         >
-          <motion.a
-            href="#"
+          <motion.div
             variants={windowWidth >= 768 ? navLinkVar : undefined}
             className="inline-block px-5"
             style={{
@@ -71,8 +71,8 @@ const NavLinks: React.FC<NavLinksProps> = ({ height }) => {
               lineHeight: height + "px",
             }}
           >
-            {link}
-          </motion.a>
+            <Link href={link.url}>{link.label}</Link>
+          </motion.div>
         </motion.li>
       ))}
     </motion.ul>

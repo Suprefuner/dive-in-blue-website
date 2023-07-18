@@ -32,15 +32,17 @@ model User {
   updatedAt      DateTime  @updatedAt
 
   accounts              Account[]
-  FavoriteList          FavoriteList[]
-  Cart                  Cart[]
+  FavoriteList          FavoriteList
+  Cart                  Cart
   Order                 Order[]
   // ==========================================================
-  asStudentCourseIds    String[]       @db.ObjectId
-  asStudentCourses      Course[]       @relation(fields: [asStudentCourseIds], references: [id])
-  asInstructorCourseIds String[]       @db.ObjectId
-  asInstructorCourses   Course[]       @relation("instructor", fields: [asInstructorCourseIds], references: [id])
+  asStudentCourseIds    String[]     @db.ObjectId
+  asStudentCourses      Course[]     @relation("student", fields: [asStudentCourseIds], references: [id])
+  asInstructorCourseIds String[]     @db.ObjectId
+  asInstructorCourses   Course[]     @relation("instructor", fields: [asInstructorCourseIds], references: [id])
   // ==========================================================
+  Course                Course?      @relation(fields: [courseId], references: [id])
+  courseId              String?      @db.ObjectId
 }
 
 // FOR SOCIAL LOGIN
@@ -78,6 +80,8 @@ model Course {
   students          User[]   @relation(fields: [studentIds], references: [id])
   instructorIds     String[] @db.ObjectId
   instructors       User[]   @relation("instructor", fields: [instructorIds], references: [id])
+  User              User?    @relation(fields: [userId], references: [id])
+  userId            String?  @db.ObjectId
 }
 
 enum GENDER {

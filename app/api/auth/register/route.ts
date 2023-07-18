@@ -35,6 +35,7 @@ export async function POST(req: Request) {
     })
 
     return NextResponse.json({ user, cart, favorites }, { status: 201 })
+    // return NextResponse.json("done", { status: 201 })
   } catch (error) {
     console.log(error, "REGISTRATION_ERROR")
     return new NextResponse("Something went wrong, please try again", {

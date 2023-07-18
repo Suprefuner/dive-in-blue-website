@@ -7,7 +7,7 @@ const SeaSnakeDecor = () => {
       <div className="absolute top-1 -left-3">
         <EyeAnimate />
       </div>
-      <div className="hidden md:block">
+      <div className="hidden md:block w-auto h-auto">
         <Image
           src="/sea_snake.svg"
           alt="illustration of sea snake"
@@ -15,7 +15,7 @@ const SeaSnakeDecor = () => {
           height={150}
         />
       </div>
-      <div className="block md:hidden">
+      <div className="block md:hidden w-auto h-auto">
         <Image
           src="/sea_snake_mobile.svg"
           alt="illustration of sea snake"
